@@ -2,7 +2,7 @@
 const app = require("express").Router();
 
 // import the models
-const { Post } = require("../models/index");
+const { Post, Category } = require("../models/index");
 
 // Route to add a new post
 app.post("/", async (req, res) => {
@@ -16,25 +16,86 @@ app.post("/", async (req, res) => {
   }
 });
 
-// Route to get all posts
 app.get("/", async (req, res) => {
   try {
-    const posts = await Post.findAll();
+    let { categoryId } = req.query; // Get categoryId from query parameters
 
+    // Ensure categoryId is a number before filtering
+    const filterOptions = {
+      include: [{ model: Category, as: "category" }],
+    };
+
+    if (categoryId) {
+      categoryId = parseInt(categoryId); // Convert to integer
+      filterOptions.where = { "$category.id$": categoryId }; // Correct filter
+    }
+
+    const posts = await Post.findAll(filterOptions);
     res.json(posts);
   } catch (error) {
-    res.status(500).json({ error: "Error retrieving posts", error });
+    console.error("Error fetching posts:", error);
+    res.status(500).json({ error: "Failed to fetch posts" });
   }
 });
 
+// Route to get a single post by ID
 app.get("/:id", async (req, res) => {
   try {
-    const post = await Post.findByPk(req.params.id);
+    const post = await Post.findByPk(req.params.id, {
+      include: [{ model: Category, as: "category" }],
+    });
     res.json(post);
   } catch (error) {
     res.status(500).json({ error: "Error retrieving post" });
   }
 });
+
+
+
+// // Route to get all posts
+// app.get("/", async (req, res) => {
+//   try {
+//     const posts = await Post.findAll({
+//     include: [{ model: Category, as: "category" }], // Include category data
+//     });
+//     res.json(posts);
+//   } catch (error) {
+//     console.error("Error fetching posts:", error);
+//     res.status(500).json({ error: "Error retrieving posts", error });
+//   }
+// });
+
+// //Add a catergory filter
+
+// app.get("/", async (req, res) => {
+//   try {
+//     const { categoryId } = req.query; // Get categoryId from query parameters
+
+//     const filterOptions = {
+//       include: [{ model: Category, as: "category" }],
+//     };
+
+//     if (categoryId) {
+//       categoryId = parseInt(categoryId); // Convert to integer
+//       filterOptions.where = { categoryId }; // Apply category filter
+//     }
+
+//     const posts = await Post.findAll(filterOptions);
+//     res.json(posts);
+//   } catch (error) {
+//     console.error("Error fetching posts:", error);
+//     res.status(500).json({ error: "Failed to fetch posts" });
+//   }
+// });
+
+// app.get("/:id", async (req, res) => {
+//   try {
+//     const post = await Post.findByPk(req.params.id);
+//     res.json(post);
+//   } catch (error) {
+//     res.status(500).json({ error: "Error retrieving post" });
+//   }
+// });
 
 // Route to update a post
 app.put("/:id", async (req, res) => {

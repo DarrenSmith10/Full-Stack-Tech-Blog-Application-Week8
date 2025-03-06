@@ -3,19 +3,22 @@
     "title": "The Rise of AI in Web Development",
     "content": "AI is transforming how we build websites, making development faster and smarter.",
     "postedBy": "John Doe",
-    "createdOn": "2024-02-04T12:00:00Z"
+    "createdOn": "2024-02-04T12:00:00Z",
+    "categoryId": 1
   },
   {
     "title": "Understanding JavaScript Closures",
     "content": "Closures allow functions to retain access to variables even after execution.",
     "postedBy": "Jane Smith",
-    "createdOn": "2024-02-03T10:15:00Z"
+    "createdOn": "2024-02-03T10:15:00Z",
+    "categoryId": 2
   },
   {
     "title": "Node.js Performance Optimization Tips",
     "content": "Learn how to speed up your Node.js applications with caching and clustering.",
     "postedBy": "Alice Brown",
-    "createdOn": "2024-02-02T08:45:00Z"
+    "createdOn": "2024-02-02T08:45:00Z",
+    "categoryId": 3
   },
   {
     "title": "Mastering Sequelize for Database Management",
