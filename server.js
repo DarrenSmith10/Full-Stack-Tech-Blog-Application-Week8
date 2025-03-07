@@ -11,7 +11,8 @@ const app = express();
 app.use(bodyParser.json());
 app.use(express.urlencoded({ extended: true }));
 
-const PORT = process.env.PORT || 3001;
+// const PORT = process.env.PORT || 3001;
+ const PORT = process.env.PORT || 1000;
 
 // has the --rebuild parameter been passed as a command line param?
 const rebuild = process.argv[2] === "--rebuild";
