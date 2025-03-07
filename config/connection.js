@@ -2,7 +2,7 @@ require("dotenv").config();
 
 const Sequelize = require("sequelize");
 
-if (process.env.DB_PASSWORD === "Darren99$$") {
+if (process.env.DB_PASSWORD === "ChangeMe!") {
   console.error("Please update the .env file with your database password.");
   process.exit(1);
 }
