@@ -10,10 +10,7 @@ function register() {
   const username = document.getElementById("username").value;
   const email = document.getElementById("email").value;
   const password = document.getElementById("password").value;
-  //fetch("http://localhost:3001/api/users" // for local
-  //fetch("https://your-backend-name.onrender.com/api/users/login", {  // ✅ Correct
-
-  fetch("https://full-stack-tech-blog-application-week8.onrender.com/api/users", {
+  fetch("http://localhost:3001/api/users", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ username, email, password }),
@@ -34,7 +31,7 @@ function register() {
 function login() {
   const email = document.getElementById("login-email").value;
   const password = document.getElementById("login-password").value;
-  fetch("https://full-stack-tech-blog-application-week8.onrender.com/api/users/login", {
+  fetch("http://localhost:3001/api/users/login", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ email, password }),
@@ -64,7 +61,7 @@ function login() {
 }
 
 function logout() {
-  fetch("https://full-stack-tech-blog-application-week8.onrender.com/api/users/logout", {
+  fetch("http://localhost:3001/api/users/logout", {
     method: "POST",
     headers: { Authorization: `Bearer ${token}` },
   }).then(() => {
@@ -77,7 +74,7 @@ function logout() {
 }
 
 function fetchPosts(categoryId = "") {
-  let url = "https://full-stack-tech-blog-application-week8.onrender.com/api/posts";
+  let url = "http://localhost:3001/api/posts";
   if (categoryId) {
     url += `?categoryId=${categoryId}`;
   }
@@ -118,7 +115,7 @@ fetch(url, {
          DeleteBtN.textContent = "x";
          DeleteBtN.addEventListener("click" , async() => {
            try{
-             const response = await fetch(`https://full-stack-tech-blog-application-week8.onrender.com/api/posts/${post.id}` , {
+             const response = await fetch(`http://localhost:3001/api/posts/${post.id}` , {
                method: "DELETE",
              });
              if(response.ok){
@@ -135,7 +132,7 @@ fetch(url, {
           const updatedTitle = prompt("Update your Title:", post.text);
           if (updatedPost !==null && updatedTitle !== null) {
             try {
-              const response = await fetch(`https://full-stack-tech-blog-application-week8.onrender.com/api/posts/${post.id}`, {
+              const response = await fetch(`http://localhost:3001/api/posts/${post.id}`, {
                 method: "PUT",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ content: updatedPost , title: updatedTitle }),
@@ -160,7 +157,7 @@ fetch(url, {
 }
 
 function fetchCategories() {
-  fetch("https://full-stack-tech-blog-application-week8.onrender.com/api/categories")
+  fetch("http://localhost:3001/api/categories")
     .then((res) => res.json())
     .then((categories) => {
       console.log("Fetched Categories:", categories); // Debugging
@@ -186,7 +183,7 @@ function fetchCategories() {
 function createPost() {
   const title = document.getElementById("post-title").value;
   const content = document.getElementById("post-content").value;
-  fetch("https://full-stack-tech-blog-application-week8.onrender.com/api/posts", {
+  fetch("http://localhost:3001/api/posts", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
