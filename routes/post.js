@@ -27,7 +27,7 @@ app.get("/", async (req, res) => {
 
     if (categoryId) {
       categoryId = parseInt(categoryId); // Convert to integer
-      filterOptions.where = { "$category.id$": categoryId }; // Correct filter
+      filterOptions.where = {categoryId }; // Correct filter
     }
 
     const posts = await Post.findAll(filterOptions);
