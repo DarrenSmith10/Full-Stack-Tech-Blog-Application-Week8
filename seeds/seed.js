@@ -3,6 +3,7 @@ const sequelize = require("../config/connection");
 
 // import models
 const { Post , Category } = require("../models");
+const { post } = require("../routes/post");
 
 // add data and seeding for Category model
 
@@ -20,12 +21,10 @@ const seedDatabase = async () => {
   const categories = await Category.bulkCreate(CategoryData , {returning: true});
 
   //We make sure the posts are assigned a valid catergoryID
-  const postsWithCategory = postData.map((post) => {
-    if (!post.categoryId) {
-      post.categoryId = categories[Math.floor(Math.random() * categories.length)].id;
-    }
-    return post;
-  });
+  const postsWithCategory = postData.map((post, index) => ({
+    ...post,
+    categoryId: categories[index % categories.length].id,
+  }));
   
 
   await Post.bulkCreate(postsWithCategory);

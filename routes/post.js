@@ -52,18 +52,18 @@ app.get("/:id", async (req, res) => {
 
 
 
-// // Route to get all posts
-// app.get("/", async (req, res) => {
-//   try {
-//     const posts = await Post.findAll({
-//     include: [{ model: Category, as: "category" }], // Include category data
-//     });
-//     res.json(posts);
-//   } catch (error) {
-//     console.error("Error fetching posts:", error);
-//     res.status(500).json({ error: "Error retrieving posts", error });
-//   }
-// });
+// Route to get all posts
+app.get("/", async (req, res) => {
+  try {
+    const posts = await Post.findAll({
+    include: [{ model: Category, as: "category" }], // Include category data
+    });
+    res.json(posts);
+  } catch (error) {
+    console.error("Error fetching posts:", error);
+    res.status(500).json({ error: "Error retrieving posts", error });
+  }
+});
 
 // //Add a catergory filter
 
