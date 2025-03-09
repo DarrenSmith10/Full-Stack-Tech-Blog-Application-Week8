@@ -163,6 +163,12 @@ function fetchCategories() {
   fetch("https://full-stack-tech-blog-application-week8.onrender.com/api/categories")
     .then((res) => res.json())
     .then((categories) => {
+
+      //create categories selection 
+      const categorySelect = document.getElementById("category-select");
+      categorySelect.innerHTML = `<option value="">Select a Category</option>`; // Default option
+
+
       console.log("Fetched Categories:", categories); // Debugging
 
       const categoryFilter = document.getElementById("category-filter");
@@ -178,6 +184,7 @@ function fetchCategories() {
         option.value = category.id;
         option.textContent = category.category_name;
         categoryFilter.appendChild(option);
+        categories.appendChild(option);
       });
     })
     .catch((error) => console.error("Error fetching categories:", error));
@@ -186,13 +193,21 @@ function fetchCategories() {
 function createPost() {
   const title = document.getElementById("post-title").value;
   const content = document.getElementById("post-content").value;
+  const postedBy = "User"; //Add User instead of null
+  const categoryId = document.getElementById("category-select").value; //get selected Category
+
+  if (!title || !content || !categoryId) {
+    alert("Please fill in all fields and select a category.");
+    return;
+  }
+
   fetch("https://full-stack-tech-blog-application-week8.onrender.com/api/posts", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
       Authorization: `Bearer ${token}`,
     },
-    body: JSON.stringify({ title, content, postedBy: "User" }),
+    body: JSON.stringify({ title, content, postedBy: "User" , categoryId }),
   })
     .then((res) => res.json())
     .then(() => {
