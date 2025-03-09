@@ -193,7 +193,7 @@ function fetchCategories() {
 function createPost() {
   const title = document.getElementById("post-title").value;
   const content = document.getElementById("post-content").value;
-  const postedBy = "User"; //Add User instead of null
+  
   const categoryId = document.getElementById("category-select").value; //get selected Category
 
   if (!title || !content || !categoryId) {
