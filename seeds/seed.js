@@ -1,5 +1,5 @@
 // Import required packages
-const sequelize = require("../config/connection");
+const sequelize = require("../config/connection_local");
 
 // import models
 const { Post , Category } = require("../models");
