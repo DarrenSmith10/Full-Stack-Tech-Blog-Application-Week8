@@ -23,7 +23,7 @@ const seedDatabase = async () => {
   //We make sure the posts are assigned a valid catergoryID
   const postsWithCategory = postData.map((post, index) => ({
     ...post,
-    categoryId: categories[index % categories.length].id,
+    categoryId: post.categoryId || categories[index % categories.length].id,
   }));
   
 

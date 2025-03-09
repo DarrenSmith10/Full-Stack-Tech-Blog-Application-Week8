@@ -30,6 +30,15 @@ Post.init(
       allowNull: false,
       defaultValue: Sequelize.NOW,
     },
+    categoryId: {
+      type: DataTypes.INTEGER,
+      references: {
+        model: "categories", // Ensure this matches your database table name
+        key: "id",
+      },
+      allowNull: true, // Allow posts without a category
+    }
+    
   },
   {
     sequelize,
