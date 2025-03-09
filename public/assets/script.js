@@ -184,8 +184,16 @@ function fetchCategories() {
         option.value = category.id;
         option.textContent = category.category_name;
         categoryFilter.appendChild(option);
-        categories.appendChild(option);
+        // categories.appendChild(option);
       });
+
+      categories.forEach((category) => {
+        const option = document.createElement("option");
+        option.value = category.id;
+        option.textContent = category.category_name; // ✅ Ensure correct category name
+        categorySelect.appendChild(option);
+      });
+
     })
     .catch((error) => console.error("Error fetching categories:", error));
 }
