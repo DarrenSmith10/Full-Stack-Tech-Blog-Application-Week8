@@ -7,8 +7,8 @@ const { Post, Category } = require("../models/index");
 // Route to add a new post
 app.post("/", async (req, res) => {
   try {
-    const { title, content, postedBy } = req.body;
-    const post = await Post.create({ title, content, postedBy });
+    const { title, content, postedBy , categoryId  } = req.body;
+    const post = await Post.create({ title, content, postedBy , categoryId  });
 
     res.status(201).json(post);
   } catch (error) {
@@ -65,7 +65,36 @@ app.get("/", async (req, res) => {
   }
 });
 
-// //Add a catergory filter
+// Route to update a post
+app.put("/:id", async (req, res) => {
+  try {
+    const { title, content, postedBy } = req.body;
+    const post = await Post.update(
+      { title, content, postedBy },
+      { where: { id: req.params.id } }
+    );
+    res.json(post);
+  } catch (error) {
+    res.status(500).json({ error: "Error updating post" });
+  }
+});
+
+// Route to delete a post
+app.delete("/:id", async (req, res) => {
+  try {
+    const post = await Post.destroy({ where: { id: req.params.id } });
+    res.json(post);
+  } catch (error) {
+    res.status(500).json({ error: "Error deleting post" });
+  }
+});
+
+// export the router
+module.exports = app;
+
+
+
+// //Old Code Add a catergory filter
 
 // app.get("/", async (req, res) => {
 //   try {
@@ -96,30 +125,3 @@ app.get("/", async (req, res) => {
 //     res.status(500).json({ error: "Error retrieving post" });
 //   }
 // });
-
-// Route to update a post
-app.put("/:id", async (req, res) => {
-  try {
-    const { title, content, postedBy } = req.body;
-    const post = await Post.update(
-      { title, content, postedBy },
-      { where: { id: req.params.id } }
-    );
-    res.json(post);
-  } catch (error) {
-    res.status(500).json({ error: "Error updating post" });
-  }
-});
-
-// Route to delete a post
-app.delete("/:id", async (req, res) => {
-  try {
-    const post = await Post.destroy({ where: { id: req.params.id } });
-    res.json(post);
-  } catch (error) {
-    res.status(500).json({ error: "Error deleting post" });
-  }
-});
-
-// export the router
-module.exports = app;
