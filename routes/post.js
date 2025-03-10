@@ -91,37 +91,3 @@ app.delete("/:id", async (req, res) => {
 
 // export the router
 module.exports = app;
-
-
-
-// //Old Code Add a catergory filter
-
-// app.get("/", async (req, res) => {
-//   try {
-//     const { categoryId } = req.query; // Get categoryId from query parameters
-
-//     const filterOptions = {
-//       include: [{ model: Category, as: "category" }],
-//     };
-
-//     if (categoryId) {
-//       categoryId = parseInt(categoryId); // Convert to integer
-//       filterOptions.where = { categoryId }; // Apply category filter
-//     }
-
-//     const posts = await Post.findAll(filterOptions);
-//     res.json(posts);
-//   } catch (error) {
-//     console.error("Error fetching posts:", error);
-//     res.status(500).json({ error: "Failed to fetch posts" });
-//   }
-// });
-
-// app.get("/:id", async (req, res) => {
-//   try {
-//     const post = await Post.findByPk(req.params.id);
-//     res.json(post);
-//   } catch (error) {
-//     res.status(500).json({ error: "Error retrieving post" });
-//   }
-// });

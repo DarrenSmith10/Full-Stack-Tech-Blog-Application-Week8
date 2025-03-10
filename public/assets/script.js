@@ -1,17 +1,12 @@
 let token = localStorage.getItem("authToken");
 
-// document.getElementById("category-filter").addEventListener("change", (event) => {
-//   const selectedCategory = event.target.value;
-//   fetchPosts(selectedCategory);
-// });
-
-
 function register() {
   const username = document.getElementById("username").value;
   const email = document.getElementById("email").value;
   const password = document.getElementById("password").value;
-  //fetch("http://localhost:3001/api/users" // for local
-  //fetch("https://your-backend-name.onrender.com/api/users/login", {  // ✅ Correct
+  
+  //changed all the fetch local links to render.com in order to
+  // deploy it. Example: fetch("https://your-backend-name.onrender.com/api/users/login", {  // ✅ Correct
 
   fetch("https://full-stack-tech-blog-application-week8.onrender.com/api/users", {
     method: "POST",
